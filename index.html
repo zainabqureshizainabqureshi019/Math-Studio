@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MathStudio | Complete Quadratic Learning Hub</title>
+    <meta name="description" content="Learn quadratic equations with step-by-step guides, practice problems, common mistakes, and an interactive solver. Free educational resource for students."/>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #1e1e2f;
+            line-height: 1.8;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: #1e1e2f;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .logo span {
+            color: #6c63ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+        .nav-links a:hover {
+            color: #6c63ff;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #1e1e2f 0%, #2d2b55 100%);
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px 60px;
+        }
+        .hero h1 {
+            font-size: 46px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .hero h1 span {
+            color: #ffd700;
+        }
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 25px;
+            opacity: 0.9;
+        }
+        .hero .btn-hero {
+            background: #6c63ff;
+            color: #fff;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .hero .btn-hero:hover {
+            background: #4a42c4;
+            transform: scale(1.03);
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #1e1e2f;
+        }
+        .section-title span {
+            border-bottom: 4px solid #6c63ff;
+            padding-bottom: 10px;
+        }
+
+        /* ===== SOLVER SECTION ===== */
+        .solver-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 35px 30px;
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.07);
+            width: 440px;
+            flex-shrink: 0;
+        }
+
+        .card h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        .input-group label {
+            font-weight: 600;
+            font-size: 18px;
+            width: 20px;
+        }
+        .input-group input {
+            width: 80px;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            transition: 0.3s;
+            background: #fafafa;
+        }
+        .input-group input:focus {
+            border-color: #6c63ff;
+            outline: none;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
+        }
+
+        .display-area {
+            background: #f0f2f7;
+            border-radius: 16px;
+            padding: 16px 14px;
+            margin: 18px 0 12px;
+            text-align: center;
+        }
+
+        .equation-box {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e1e2f;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .formula-box {
+            font-size: 17px;
+            font-weight: 500;
+            color: #2d2b55;
+            padding-top: 8px;
+            font-family: 'Courier New', monospace;
+            background: #e6e9f0;
+            border-radius: 10px;
+            padding: 8px 10px;
+            margin-top: 8px;
+        }
+        .formula-box span {
+            color: #6c63ff;
+            font-weight: 700;
+        }
+
+        .btn-solve {
+            background: #6c63ff;
+            color: #fff;
+            border: none;
+            padding: 14px 0;
+            width: 100%;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px 0 15px;
+        }
+        .btn-solve:hover {
+            background: #4a42c4;
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(108, 99, 255, 0.3);
+        }
+
+        .result-box {
+            background: #f8f9fc;
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+            min-height: 56px;
+            border-left: 4px solid #6c63ff;
+        }
+
+        .graph-wrapper {
+            background: #fff;
+            padding: 25px 20px;
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.07);
+            text-align: center;
+            flex: 1;
+            min-width: 300px;
+        }
+        .graph-wrapper h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #1e1e2f;
+        }
+        canvas {
+            background: #fafbfc;
+            border-radius: 16px;
+            border: 1px solid #eaeef2;
+            width: 100%;
+            height: auto;
+            max-width: 420px;
+        }
+
+        /* ===== ARTICLES GRID ===== */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .article-card {
+            background: #fff;
+            padding: 30px 25px;
+            border-radius: 24px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.05);
+            border-top: 5px solid #6c63ff;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+        }
+        .article-card .badge {
+            display: inline-block;
+            background: #6c63ff;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        .article-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #1e1e2f;
+        }
+        .article-card p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .article-card .read-more {
+            display: inline-block;
+            margin-top: 12px;
+            color: #6c63ff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .article-card .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== FULL ARTICLE PAGE ===== */
+        .full-article {
+            display: none;
+            background: #fff;
+            padding: 40px 35px;
+            border-radius: 28px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.05);
+            margin: 30px 0;
+        }
+        .full-article.active {
+            display: block;
+        }
+        .full-article h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #1e1e2f;
+        }
+        .full-article h3 {
+            font-size: 24px;
+            margin: 25px 0 12px;
+            color: #2d2b55;
+        }
+        .full-article h4 {
+            font-size: 20px;
+            margin: 20px 0 10px;
+            color: #1e1e2f;
+        }
+        .full-article p {
+            font-size: 17px;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .full-article ul, .full-article ol {
+            margin: 10px 0 20px 25px;
+            color: #444;
+        }
+        .full-article ul li, .full-article ol li {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .full-article .formula-box-lg {
+            background: #f0f2f7;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #1e1e2f;
+            font-family: 'Courier New', monospace;
+        }
+        .full-article .back-btn {
+            background: #e0e4eb;
+            color: #1e1e2f;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+        .full-article .back-btn:hover {
+            background: #c8cdd6;
+        }
+
+        /* ===== PAGE CONTENT ===== */
+        .page-content {
+            background: #fff;
+            padding: 40px 35px;
+            border-radius: 28px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.05);
+            margin: 30px 0;
+        }
+        .page-content h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #1e1e2f;
+        }
+        .page-content h3 {
+            font-size: 22px;
+            margin: 20px 0 10px;
+            color: #2d2b55;
+        }
+        .page-content p {
+            font-size: 17px;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .page-content ul {
+            margin: 10px 0 20px 25px;
+            color: #444;
+        }
+        .page-content ul li {
+            margin-bottom: 8px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #1e1e2f;
+            color: #aaa;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+        }
+        footer a {
+            color: #6c63ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 850px) {
+            .solver-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card {
+                width: 100%;
+                max-width: 460px;
+            }
+            .graph-wrapper {
+                width: 100%;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 14px;
+                padding: 16px 20px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero p {
+                font-size: 17px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            .formula-box {
+                font-size: 14px;
+            }
+            .full-article {
+                padding: 25px 20px;
+            }
+            .full-article h2 {
+                font-size: 26px;
+            }
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #6c63ff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+            transition: 0.3s;
+            display: none;
+        }
+        .scroll-top:hover {
+            background: #4a42c4;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <div class="logo">Math<span>Studio</span></div>
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#solver">Solver</a>
+        <a href="#articles">Learn</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#privacy">Privacy</a>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="home" class="hero">
+    <h1>Learn & Solve <span>Quadratics</span></h1>
+    <p>Your complete free resource for understanding quadratic equations. Step-by-step lessons, interactive solver, and real-time graphing – all in one place.</p>
+    <a href="#solver" class="btn-hero">🚀 Try the Solver</a>
+</section>
+
+<!-- ===== SOLVER ===== -->
+<section id="solver" class="container">
+    <h2 class="section-title"><span>📐 Quadratic Solver</span></h2>
+    <div class="solver-wrapper">
+
+        <div class="card">
+            <h2>Enter coefficients</h2>
+            <div class="input-group">
+                <label>a</label> 
+                <input type="number" id="a" step="any" value="1" oninput="updateLivePreview()">
+                <label>b</label> 
+                <input type="number" id="b" step="any" value="-4" oninput="updateLivePreview()">
+                <label>c</label> 
+                <input type="number" id="c" step="any" value="3" oninput="updateLivePreview()">
+            </div>
+
+            <div class="display-area">
+                <div class="equation-box" id="equationDisplay">x² − 4x + 3 = 0</div>
+                <div class="formula-box" id="formulaDisplay">
+                    x = <span>(-(-4) ± √((-4)² − 4(1)(3))) / 2(1)</span>
+                </div>
+            </div>
+
+            <button class="btn-solve" onclick="solveEquation()">✨ Solve (Calculate Roots)</button>
+
+            <div class="result-box" id="resultDisplay">✅ x₁ = 3.00 , x₂ = 1.00</div>
+        </div>
+
+        <div class="graph-wrapper">
+            <h3>📈 Parabola Graph</h3>
+            <canvas id="graphCanvas" width="420" height="300"></canvas>
+            <p style="font-size:13px; color:#888; margin-top:12px;">🔴 Red &amp; 🔵 Blue dots are the roots (x₁, x₂)</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== ARTICLES SECTION ===== -->
+<section id="articles" class="container">
+    <h2 class="section-title"><span>📚 All Learning Articles</span></h2>
+    
+    <div class="articles-grid">
+        <!-- Article 1: Conceptual -->
+        <div class="article-card" onclick="showArticle('article1')">
+            <span class="badge">📘 Conceptual</span>
+            <h3>What is a Quadratic Equation?</h3>
+            <p>Learn the definition, standard form (ax² + bx + c = 0), and real-life applications. Understand why they are called "quadratic".</p>
+            <span class="read-more">Read Full Article →</span>
+        </div>
+
+        <!-- Article 2: Step-by-Step -->
+        <div class="article-card" onclick="showArticle('article2')">
+            <span class="badge">🛠️ Step-by-Step</span>
+            <h3>How to Solve 2x² − 5x + 2 = 0 (Full Guide)</h3>
+            <p>Follow every step from identifying a, b, c to finding the final roots with detailed explanations.</p>
+            <span class="read-more">Read Full Article →</span>
+        </div>
+
+        <!-- Article 3: Common Mistakes -->
+        <div class="article-card" onclick="showArticle('article3')">
+            <span class="badge">❌ Mistakes & Fixes</span>
+            <h3>5 Most Common Quadratic Equation Mistakes</h3>
+            <p>Learn the most frequent errors students make and how to avoid them with clear examples.</p>
+            <span class="read-more">Read Full Article →</span>
+        </div>
+
+        <!-- Article 4: Practice Problems -->
+        <div class="article-card" onclick="showArticle('article4')">
+            <span class="badge">📝 Practice</span>
+            <h3>10 Quadratic Equations to Solve (With Answers)</h3>
+            <p>Test your skills with 10 different equations. Complete solutions are provided at the end.</p>
+            <span class="read-more">Read Full Article →</span>
+        </div>
+
+        <!-- Article 5: Comparison -->
+        <div class="article-card" onclick="showArticle('article5')">
+            <span class="badge">🔄 Comparison</span>
+            <h3>Quadratic Formula vs Factoring: Which to Use?</h3>
+            <p>Understand when to use the quadratic formula and when factoring is faster and easier.</p>
+            <span class="read-more">Read Full Article →</span>
+        </div>
+
+        <!-- Article 6: Discriminant -->
+        <div class="article-card" onclick="showArticle('article6')">
+            <span class="badge">📘 Conceptual</span>
+            <h3>Understanding the Discriminant (D = b² − 4ac)</h3>
+            <p>Learn what the discriminant tells you about the nature of roots with real examples and graphs.</p>
+            <span class="read-more">Read Full Article →</span>
+        </div>
+    </div>
+
+    <!-- ===== FULL ARTICLES ===== -->
+
+    <!-- Full Article 1 -->
+    <div id="article1" class="full-article">
+        <button class="back-btn" onclick="hideArticle('article1')">← Back to Articles</button>
+        <h2>What is a Quadratic Equation?</h2>
+        <p>A <strong>quadratic equation</strong> is a polynomial equation of degree 2. The standard form is:</p>
+        <div class="formula-box-lg">ax² + bx + c = 0</div>
+        <p>where <strong>a</strong>, <strong>b</strong>, and <strong>c</strong> are constants, and <strong>a ≠ 0</strong>. If a = 0, the equation becomes linear, not quadratic.</p>
+        
+        <h3>Why "Quadratic"?</h3>
+        <p>The word "quadratic" comes from the Latin word <em>"quadratus"</em>, which means "square". This is because the variable x is squared (x²).</p>
+        
+        <h3>Real-Life Applications</h3>
+        <ul>
+            <li><strong>Physics:</strong> Projectile motion – the path of a thrown ball follows a quadratic equation.</li>
+            <li><strong>Engineering:</strong> Designing bridges and arches.</li>
+            <li><strong>Finance:</strong> Calculating profit, loss, and break-even points.</li>
+            <li><strong>Biology:</strong> Modeling population growth.</li>
+        </ul>
+        
+        <h3>Key Components</h3>
+        <ul>
+            <li><strong>a:</strong> Coefficient of x² – determines the shape of the parabola.</li>
+            <li><strong>b:</strong> Coefficient of x – affects the position of the vertex.</li>
+            <li><strong>c:</strong> Constant term – where the parabola crosses the y-axis.</li>
+        </ul>
+    </div>
+
+    <!-- Full Article 2 -->
+    <div id="article2" class="full-article">
+        <button class="back-btn" onclick="hideArticle('article2')">← Back to Articles</button>
+        <h2>How to Solve 2x² − 5x + 2 = 0 (Full Guide)</h2>
+        <p>Let's solve the equation <strong>2x² − 5x + 2 = 0</strong> step by step using the quadratic formula.</p>
+        
+        <h3>Step 1: Identify a, b, and c</h3>
+        <p>Compare with the standard form ax² + bx + c = 0:</p>
+        <ul>
+            <li>a = <strong>2</strong></li>
+            <li>b = <strong>-5</strong></li>
+            <li>c = <strong>2</strong></li>
+        </ul>
+        
+        <h3>Step 2: Write the Quadratic Formula</h3>
+        <div class="formula-box-lg">x = (-b ± √(b² − 4ac)) / 2a</div>
+        
+        <h3>Step 3: Calculate the Discriminant</h3>
+        <p>D = b² − 4ac = (-5)² − 4(2)(2) = 25 − 16 = <strong>9</strong></p>
+        <p>Since D > 0, there will be two distinct real roots.</p>
+        
+        <h3>Step 4: Plug into the Formula</h3>
+        <p>x = (-(-5) ± √9) / 2(2) = (5 ± 3) / 4</p>
+        
+        <h3>Step 5: Find the Two Roots</h3>
+        <ul>
+            <li>x₁ = (5 + 3) / 4 = 8/4 = <strong>2</strong></li>
+            <li>x₂ = (5 − 3) / 4 = 2/4 = <strong>0.5</strong></li>
+        </ul>
+        
+        <h3>Final Answer</h3>
+        <p>The solutions are <strong>x = 2</strong> and <strong>x = 0.5</strong>.</p>
+        <p>✅ You can verify by plugging these values back into the original equation.</p>
+    </div>
+
+    <!-- Full Article 3 -->
+    <div id="article3" class="full-article">
+        <button class="back-btn" onclick="hideArticle('article3')">← Back to Articles</button>
+        <h2>5 Most Common Quadratic Equation Mistakes</h2>
+        
+        <h3>Mistake #1: Incorrectly Identifying a, b, and c</h3>
+        <p><strong>Example:</strong> For 2x² + 3x = 5, students forget to move 5 to the other side.</p>
+        <p><strong>Fix:</strong> Always write in standard form: 2x² + 3x − 5 = 0. Now a=2, b=3, c=-5.</p>
+        
+        <h3>Mistake #2: Forgetting the ± Sign</h3>
+        <p><strong>Example:</strong> Only writing x = (-b + √D)/2a and forgetting the negative.</p>
+        <p><strong>Fix:</strong> Always write both: x₁ = (-b + √D)/2a and x₂ = (-b − √D)/2a.</p>
+        
+        <h3>Mistake #3: Misplacing Signs</h3>
+        <p><strong>Example:</strong> For x² − 4x + 4 = 0, some write a=1, b=4, c=4 instead of b=-4.</p>
+        <p><strong>Fix:</strong> The sign of b is the sign that appears with x. Here b = <strong>-4</strong>.</p>
+        
+        <h3>Mistake #4: Incorrectly Simplifying</h3>
+        <p><strong>Example:</strong> (5 ± 3)/4 – some simplify to 2 ± 3/4 incorrectly.</p>
+        <p><strong>Fix:</strong> Treat the numerator as a single expression: (5+3)/4 and (5-3)/4.</p>
+        
+        <h3>Mistake #5: Not Checking the Discriminant First</h3>
+        <p><strong>Example:</strong> Proceeding with the formula when D is negative.</p>
+        <p><strong>Fix:</strong> Always calculate D first. If D < 0, write "No real roots" and stop.</p>
+    </div>
+
+    <!-- Full Article 4 -->
+    <div id="article4" class="full-article">
+        <button class="back-btn" onclick="hideArticle('article4')">← Back to Articles</button>
+        <h2>10 Quadratic Equations to Solve (With Answers)</h2>
+        <p>Solve each equation using the quadratic formula. Then check your answers below.</p>
+        
+        <h3>Practice Problems</h3>
+        <ol>
+            <li>x² − 5x + 6 = 0</li>
+            <li>2x² + 3x − 2 = 0</li>
+            <li>x² − 4x + 4 = 0</li>
+            <li>3x² + 5x − 2 = 0</li>
+            <li>x² + 2x + 5 = 0</li>
+            <li>4x² − 4x + 1 = 0</li>
+            <li>2x² − 7x + 3 = 0</li>
+            <li>x² + 6x + 9 = 0</li>
+            <li>5x² − 3x − 2 = 0</li>
+            <li>x² − 3x − 10 = 0</li>
+        </ol>
+        
+        <h3>Answers</h3>
+        <ol>
+            <li>x = 2, 3</li>
+            <li>x = 0.5, -2</li>
+            <li>x = 2 (Double root)</li>
+            <li>x = -2/3, 1</li>
+            <li>No real roots (D = -16)</li>
+            <li>x = 0.5 (Double root)</li>
+            <li>x = 0.5, 3</li>
+            <li>x = -3 (Double root)</li>
+            <li>x = -0.4, 1</li>
+            <li>x = -2, 5</li>
+        </ol>
+    </div>
+
+    <!-- Full Article 5 -->
+    <div id="article5" class="full-article">
+        <button class="back-btn" onclick="hideArticle('article5')">← Back to Articles</button>
+        <h2>Quadratic Formula vs Factoring: Which to Use?</h2>
+        <p>Both methods solve quadratic equations, but which one should you use?</p>
+        
+        <h3>Quadratic Formula</h3>
+        <ul>
+            <li><strong>Pros:</strong> Works for <strong>every</strong> quadratic equation. No guesswork.</li>
+            <li><strong>Cons:</strong> More time-consuming and requires careful arithmetic.</li>
+            <li><strong>Best for:</strong> Complex equations or when factoring is not obvious.</li>
+        </ul>
+        <div class="formula-box-lg">x = (-b ± √(b² − 4ac)) / 2a</div>
+        
+        <h3>Factoring</h3>
+        <ul>
+            <li><strong>Pros:</strong> Much faster and simpler when it works.</li>
+            <li><strong>Cons:</strong> Only works when the equation can be factored (not always possible).</li>
+            <li><strong>Best for:</strong> Simple equations with integer roots.</li>
+        </ul>
+        
+        <h3>When to Use Each</h3>
+        <ul>
+            <li><strong>Use Factoring</strong> for: x² − 5x + 6 = 0 → (x − 2)(x − 3) = 0 → x = 2, 3</li>
+            <li><strong>Use Quadratic Formula</strong> for: 2x² + 3x − 1 = 0 → Factoring is not obvious → use formula.</li>
+        </ul>
+        
+        <h3>Rule of Thumb</h3>
+        <ul>
+            <li>If a, b, and c are small integers, try factoring first.</li>
+            <li>If factoring doesn't work quickly, use the quadratic formula.</li>
+            <li>If you're not sure, the quadratic formula always works!</li>
+        </ul>
+    </div>
+
+    <!-- Full Article 6 -->
+    <div id="article6" class="full-article">
+        <button class="back-btn" onclick="hideArticle('article6')">← Back to Articles</button>
+        <h2>Understanding the Discriminant (D = b² − 4ac)</h2>
+        <p>The <strong>discriminant</strong> is the part under the square root in the quadratic formula.</p>
+        <div class="formula-box-lg">D = b² − 4ac</div>
+        
+        <h3>What Does the Discriminant Tell Us?</h3>
+        <p>The discriminant tells us about the <strong>nature of the roots</strong> without actually solving the equation.</p>
+        
+        <h3>Three Cases</h3>
+        <h4>Case 1: D > 0 (Positive)</h4>
+        <p>The equation has <strong>two distinct real roots</strong>. The parabola crosses the x-axis at two points.</p>
+        <p><strong>Example:</strong> x² − 4x + 3 = 0 → D = 16 − 12 = 4 → x = 3, 1</p>
+        
+        <h4>Case 2: D = 0 (Zero)</h4>
+        <p>The equation has <strong>one real double root</strong>. The parabola touches the x-axis at exactly one point (the vertex).</p>
+        <p><strong>Example:</strong> x² − 4x + 4 = 0 → D = 16 − 16 = 0 → x = 2 (double root)</p>
+        
+        <h4>Case 3: D < 0 (Negative)</h4>
+        <p>The equation has <strong>no real roots</strong>. The parabola never crosses the x-axis.</p>
+        <p><strong>Example:</strong> x² + 2x + 5 = 0 → D = 4 − 20 = -16 → No real roots</p>
+        
+        <h3>Quick Reference Table</h3>
+        <table style="width:100%; border-collapse:collapse; margin:20px 0;">
+            <tr style="background:#6c63ff; color:#fff;">
+                <th style="padding:12px; border:1px solid #ddd;">Discriminant (D)</th>
+                <th style="padding:12px; border:1px solid #ddd;">Nature of Roots</th>
+                <th style="padding:12px; border:1px solid #ddd;">Graph</th>
+            </tr>
+            <tr style="background:#f8f9fc;">
+                <td style="padding:10px; border:1px solid #ddd;"><strong>D > 0</strong></td>
+                <td style="padding:10px; border:1px solid #ddd;">Two distinct real roots</td>
+                <td style="padding:10px; border:1px solid #ddd;">Parabola crosses X-axis twice</td>
+            </tr>
+            <tr>
+                <td style="padding:10px; border:1px solid #ddd;"><strong>D = 0</strong></td>
+                <td style="padding:10px; border:1px solid #ddd;">One double real root</td>
+                <td style="padding:10px; border:1px solid #ddd;">Parabola touches X-axis once</td>
+            </tr>
+            <tr style="background:#f8f9fc;">
+                <td style="padding:10px; border:1px solid #ddd;"><strong>D < 0</strong></td>
+                <td style="padding:10px; border:1px solid #ddd;">No real roots</td>
+                <td style="padding:10px; border:1px solid #ddd;">Parabola never crosses X-axis</td>
+            </tr>
+        </table>
+        
+        <h3>Why Does This Matter?</h3>
+        <p>Checking the discriminant first saves you time. If D < 0, you can stop immediately and say "No real roots" without doing further calculation.</p>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="container">
+    <h2 class="section-title"><span>🧠 About MathStudio</span></h2>
+    <div class="page-content">
+        <h2>Our Mission</h2>
+        <p><strong>MathStudio</strong> was created to make mathematics accessible and enjoyable for everyone. We believe that understanding math is the key to unlocking countless opportunities in science, technology, and engineering.</p>
+        <p>This platform combines an <strong>interactive quadratic solver</strong> with <strong>comprehensive educational content</strong> to help students, teachers, and lifelong learners master quadratic equations.</p>
+        <p>Built with ❤️ by <strong>Zainab Qureshi</strong> – a passionate developer and mathematics enthusiast dedicated to building tools that empower learners.</p>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="container">
+    <h2 class="section-title"><span>📬 Contact Us</span></h2>
+    <div class="page-content">
+        <h2>Get in Touch</h2>
+        <p>Have questions, feedback, or suggestions? We would love to hear from you! Feel free to reach out through any of the channels below.</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:zainabqureshizainabqureshi019@gmail.com">zainabqureshizainabqureshi019@gmail.com</a></li>
+            <li><strong>GitHub:</strong> <a href="https://github.com/zainabqureshizainabqureshi019" target="_blank">github.com/zainabqureshizainabqureshi019</a></li>
+            <li><strong>LinkedIn:</strong> <a href="#" target="_blank">Connect on LinkedIn</a></li>
+        </ul>
+        <p>We typically respond within 24-48 hours. Your input helps us improve MathStudio for everyone!</p>
+    </div>
+</section>
+
+<!-- ===== PRIVACY POLICY ===== -->
+<section id="privacy" class="container">
+    <h2 class="section-title"><span>🔒 Privacy Policy</span></h2>
+    <div class="page-content">
+        <h2>Privacy Policy for MathStudio</h2>
+        <p><strong>Last updated:</strong> June 20, 2026</p>
+        <p>At MathStudio, we take your privacy seriously. This policy describes how we handle your information when you use our website.</p>
+        
+        <h3>1. Information We Collect</h3>
+        <p>MathStudio does <strong>not</strong> collect, store, or share any personal information. Our solver tool processes mathematical inputs (a, b, c coefficients) locally in your browser – nothing is sent to any server.</p>
+        
+        <h3>2. Cookies</h3>
+        <p>We do not use cookies or any tracking technologies. Your browsing experience is completely private.</p>
+        
+        <h3>3. Third-Party Services</h3>
+        <p>We do not use analytics, advertising networks, or third-party data collection services on this site.</p>
+        
+        <h3>4. Data Security</h3>
+        <p>Since we do not collect any data, there is no data to secure or compromise. All calculations run locally in your browser using JavaScript.</p>
+        
+        <h3>5. Changes to This Policy</h3>
+        <p>Any changes to this privacy policy will be updated on this page. This policy is effective as of the date above.</p>
+        
+        <h3>6. Contact Us</h3>
+        <p>If you have any questions about this privacy policy, please contact us at: <a href="mailto:zainabqureshizainabqureshi019@gmail.com">zainabqureshizainabqureshi019@gmail.com</a></p>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#solver">Solver</a>
+        <a href="#articles">Learn</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#privacy">Privacy</a>
+    </div>
+    <p>© 2026 <strong>MathStudio</strong> — Built with ❤️ by <strong>Zainab Qureshi</strong></p>
+    <p style="font-size:14px; margin-top:6px;">
+        🌐 <a href="https://comfy-sorbet-e3ed69.netlify.app" target="_blank">Live Demo</a> &nbsp;|&nbsp;
+        💻 <a href="https://github.com/zainabqureshizainabqureshi019/Quadratic_Solver" target="_blank">GitHub</a>
+    </p>
+</footer>
+
+<!-- ===== SCROLL TO TOP ===== -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    // ===== LIVE PREVIEW =====
+    function updateLivePreview() {
+        let a = parseFloat(document.getElementById('a').value);
+        let b = parseFloat(document.getElementById('b').value);
+        let c = parseFloat(document.getElementById('c').value);
+
+        if (isNaN(a)) a = 0;
+        if (isNaN(b)) b = 0;
+        if (isNaN(c)) c = 0;
+
+        // Build equation
+        let eq = "";
+        if (a === 0 && b === 0 && c === 0) {
+            eq = "0 = 0";
+        } else {
+            if (a === 1) eq = "x²";
+            else if (a === -1) eq = "−x²";
+            else if (a !== 0) eq = a + "x²";
+            
+            if (b > 0 && eq !== "") eq += " + " + b + "x";
+            else if (b < 0 && eq !== "") eq += " − " + Math.abs(b) + "x";
+            else if (b !== 0 && eq === "") eq = b + "x";
+
+            if (c > 0 && eq !== "") eq += " + " + c;
+            else if (c < 0 && eq !== "") eq += " − " + Math.abs(c);
+            else if (c !== 0 && eq === "") eq = c;
+        }
+        eq += " = 0";
+        document.getElementById('equationDisplay').innerText = eq;
+
+        // Build formula
+        let formulaText = "";
+        if (a === 0) {
+            formulaText = "⚠️ 'a' cannot be zero";
+        } else {
+            let discriminant = (b * b) - (4 * a * c);
+            formulaText = `x = (-(${b}) ± √((${b})² − 4(${a})(${c}))) / 2(${a})  |  D = ${discriminant}`;
+        }
+        document.getElementById('formulaDisplay').innerHTML = `x = <span>${formulaText}</span>`;
+    }
+
+    // ===== SOLVE EQUATION =====
+    function solveEquation() {
+        let a = parseFloat(document.getElementById('a').value);
+        let b = parseFloat(document.getElementById('b').value);
+        let c = parseFloat(document.getElementById('c').value);
+
+        if (isNaN(a) || isNaN(b) || isNaN(c)) {
+            document.getElementById('resultDisplay').innerText = "❌ Please enter valid numbers!";
+            drawGraph(0, 0, 0);
+            return;
+        }
+        if (a === 0) {
+            document.getElementById('resultDisplay').innerText = "❌ 'a' cannot be zero!";
+            drawGraph(0, 0, 0);
+            return;
+        }
+
+        updateLivePreview();
+
+        let d = (b * b) - (4 * a * c);
+        let resultText = "";
+
+        if (d < 0) {
+            resultText = "❌ No Real Roots (D = " + d + ")";
+        } else if (d === 0) {
+            let x = (-b) / (2 * a);
+            resultText = "✅ Double Root: x = " + x.toFixed(2);
+        } else {
+            let sqrtD = Math.sqrt(d);
+            let x1 = (-b + sqrtD) / (2 * a);
+            let x2 = (-b - sqrtD) / (2 * a);
+            resultText = "✅ x₁ = " + x1.toFixed(2) + " , x₂ = " + x2.toFixed(2);
+        }
+        document.getElementById('resultDisplay').innerText = resultText;
+
+        drawGraph(a, b, c);
+    }
+
+    // ===== DRAW GRAPH =====
+    function drawGraph(a, b, c) {
+        let canvas = document.getElementById('graphCanvas');
+        let ctx = canvas.getContext('2d');
+        let W = canvas.width;
+        let H = canvas.height;
+        ctx.clearRect(0, 0, W, H);
+
+        ctx.fillStyle = "#fafbfc";
+        ctx.fillRect(0, 0, W, H);
+
+        let scale = 30;
+        let cx = W / 2;
+        let cy = H / 2;
+
+        // Grid
+        ctx.strokeStyle = "#e0e4eb";
+        ctx.lineWidth = 0.8;
+        for (let i = -8; i <= 8; i++) {
+            if (i === 0) continue;
+            let pos = cx + i * scale;
+            ctx.beginPath();
+            ctx.moveTo(pos, 0);
+            ctx.lineTo(pos, H);
+            ctx.stroke();
+            let posY = cy - i * scale;
+            ctx.beginPath();
+            ctx.moveTo(0, posY);
+            ctx.lineTo(W, posY);
+            ctx.stroke();
+        }
+
+        // Axes
+        ctx.strokeStyle = "#1e1e2f";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, cy);
+        ctx.lineTo(W, cy);
+        ctx.moveTo(cx, 0);
+        ctx.lineTo(cx, H);
+        ctx.stroke();
+
+        ctx.fillStyle = "#1e1e2f";
+        ctx.font = "13px Arial";
+        ctx.fillText("O", cx + 6, cy - 6);
+        ctx.fillText("x", W - 18, cy - 10);
+        ctx.fillText("y", cx + 10, 18);
+
+        if (a === 0 && b === 0 && c === 0) {
+            ctx.fillStyle = "#aaa";
+            ctx.font = "16px Arial";
+            ctx.fillText("No Data", 160, 160);
+            return;
+        }
+
+        // Parabola
+        ctx.strokeStyle = "#6c63ff";
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        let firstPoint = true;
+        for (let x = -8; x <= 8; x += 0.05) {
+            let y = a * x * x + b * x + c;
+            let sx = cx + x * scale;
+            let sy = cy - y * scale;
+            if (sy < -200 || sy > 500) {
+                firstPoint = true;
+                continue;
+            }
+            if (firstPoint) {
+                ctx.moveTo(sx, sy);
+                firstPoint = false;
+            } else {
+                ctx.lineTo(sx, sy);
+            }
+        }
+        ctx.stroke();
+
+        // Roots
+        let d = (b * b) - (4 * a * c);
+        if (a !== 0 && d >= 0) {
+            let sqrtD = Math.sqrt(d);
+            let x1 = (-b + sqrtD) / (2 * a);
+            let x2 = (-b - sqrtD) / (2 * a);
+
+            let sx1 = cx + x1 * scale;
+            if (sx1 > 10 && sx1 < W - 10) {
+                ctx.shadowColor = "white";
+                ctx.shadowBlur = 6;
+                ctx.fillStyle = "#e74c3c";
+                ctx.beginPath();
+                ctx.arc(sx1, cy, 7, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = "#e74c3c";
+                ctx.font = "bold 14px Arial";
+                ctx.fillText("x₁", sx1 - 14, cy - 18);
+            }
+
+            if (Math.abs(x1 - x2) > 0.01) {
+                let sx2 = cx + x2 * scale;
+                if (sx2 > 10 && sx2 < W - 10) {
+                    ctx.shadowColor = "white";
+                    ctx.shadowBlur = 6;
+                    ctx.fillStyle = "#3498db";
+                    ctx.beginPath();
+                    ctx.arc(sx2, cy, 7, 0, 2 * Math.PI);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                    ctx.fillStyle = "#3498db";
+                    ctx.font = "bold 14px Arial";
+                    ctx.fillText("x₂", sx2 - 14, cy - 18);
+                }
+            }
+        }
+    }
+
+    // ===== ARTICLE TOGGLE =====
+    function showArticle(id) {
+        document.querySelectorAll('.full-article').forEach(el => {
+            el.classList.remove('active');
+        });
+        document.getElementById(id).classList.add('active');
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function hideArticle(id) {
+        document.getElementById(id).classList.remove('active');
+        document.getElementById('articles').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ===== SCROLL TO TOP =====
+    window.onscroll = function() {
+        let btn = document.getElementById('scrollTop');
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            btn.style.display = 'block';
+        } else {
+            btn.style.display = 'none';
+        }
+    };
+
+    // ===== ON LOAD =====
+    window.onload = function() {
+        document.getElementById('a').value = 1;
+        document.getElementById('b').value = -4;
+        document.getElementById('c').value = 3;
+        updateLivePreview();
+        solveEquation();
+    };
+</script>
+</body>
+</html>
