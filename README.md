@@ -1,10 +1,6 @@
 # MathStudio - Learn & Solve Quadratics
 
 A complete educational platform for learning quadratic equations with an interactive solver, step-by-step guides, practice problems, and live graphing.
-
-## 🌐 Live Demo
-[https://zainabqureshizainabqureshi019.github.io/MathStudio/](https://zainabqureshizainabqureshi019.github.io/MathStudio/)
-
 ## 📚 What's Included
 - **Interactive Quadratic Solver** - Solve any quadratic equation instantly
 - **Live Equation Preview** - See the equation update as you type
@@ -17,10 +13,4 @@ A complete educational platform for learning quadratic equations with an interac
 ## 🛠️ Tech Stack
 - HTML5 & CSS3
 - JavaScript (Canvas API for graphing)
-- Netlify & GitHub Pages for deployment
-
-## 💻 Source Code
-[https://github.com/zainabqureshizainabqureshi019/MathStudio](https://github.com/zainabqureshizainabqureshi019/MathStudio)
-
-## 👩‍💻 Author
-**Zainab Qureshi** - [GitHub](https://github.com/zainabqureshizainabqureshi019)
+- Netlify & GitHub Pages for deployong
